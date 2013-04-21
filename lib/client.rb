@@ -19,16 +19,20 @@ class MozWeb
   include Celluloid::Logger
 
   def initialize
-    s = Celluloid::IO::TCPSocket.new('0.0.0.0', '9123')
-    handler = WebSocket::Protocol.client(s)
+    @socket = Celluloid::IO::TCPSocket.new('0.0.0.0', '9123')
+  end
+
+  def start
+    handler = WebSocket::Protocol.client(@socket)
     handler.onmessage { |message| info(message.data) }
     handler.onopen { |message| info("websocket opened") }
     handler.onclose { |message| info("websocket closed") }
     handler.start
-    loop { handler.parse(s.readpartial(100)) }
+    loop { handler.parse(@socket.readpartial(100)) }
   end
 end
 
 MozWeb.supervise_as(:mozweb)
+Celluloid::Actor[:mozweb].start
 
 sleep
