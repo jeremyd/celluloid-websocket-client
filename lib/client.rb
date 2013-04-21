@@ -21,12 +21,11 @@ class MozWeb
   def initialize
     s = Celluloid::IO::TCPSocket.new('0.0.0.0', '9123')
     handler = WebSocket::Protocol.client(s)
-
-    handler.onmessage { |message| puts "never gets here" }
-    handler.onopen { |message| puts "open" }
-    handler.onclose { |message| puts "close" }
-
+    handler.onmessage { |message| info(message.data) }
+    handler.onopen { |message| info("websocket opened") }
+    handler.onclose { |message| info("websocket closed") }
     handler.start
+    loop { handler.parse(s.readpartial(100)) }
   end
 end
 
