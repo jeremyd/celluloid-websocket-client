@@ -1,8 +1,11 @@
+require 'forwardable'
+
 module Celluloid
   module WebSocket
     module Client
       class Connection
         include Celluloid::IO
+        extend Forwardable
 
         def initialize(url, handler)
           @url = url
@@ -18,13 +21,13 @@ module Celluloid
 
         def run
           @client.onopen do |event|
-            @handler.on_open if @handler.respond_to?(:on_open)
+            @handler.async.on_open if @handler.respond_to?(:on_open)
           end
           @client.onmessage do |event|
-            @handler.on_message(event.data) if @handler.respond_to?(:on_message)
+            @handler.async.on_message(event.data) if @handler.respond_to?(:on_message)
           end
           @client.onclose do |event|
-            @handler.on_close(event.code, event.reason) if @handler.respond_to?(:on_close)
+            @handler.async.on_close(event.code, event.reason) if @handler.respond_to?(:on_close)
           end
 
           @client.start
@@ -33,6 +36,8 @@ module Celluloid
             @client.parse(@socket.readpartial(1024))
           end
         end
+
+        def_delegators :@client, :text
 
         def write(buffer)
           @socket.write buffer
