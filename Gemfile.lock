@@ -1,12 +1,5 @@
 GIT
-  remote: git://github.com/celluloid/celluloid
-  revision: 1b536e9a3c33e953677f495cc0a213fb170a857d
-  specs:
-    celluloid (0.14.0.pre)
-      timers (>= 1.0.0)
-
-GIT
-  remote: git://github.com/celluloid/celluloid-io
+  remote: git://github.com/celluloid/celluloid-io.git
   revision: c014887d33c74a426fd0440aa3b99e6c31744709
   specs:
     celluloid-io (0.14.0.pre)
@@ -14,7 +7,14 @@ GIT
       nio4r (>= 0.4.0)
 
 GIT
-  remote: git://github.com/celluloid/reel
+  remote: git://github.com/celluloid/celluloid.git
+  revision: 1b536e9a3c33e953677f495cc0a213fb170a857d
+  specs:
+    celluloid (0.14.0.pre)
+      timers (>= 1.0.0)
+
+GIT
+  remote: git://github.com/celluloid/reel.git
   revision: a2739675710312942a12a3f42d623fa85f7932f1
   specs:
     reel (0.3.0)
@@ -25,14 +25,7 @@ GIT
       websocket_parser (>= 0.1.2)
 
 GIT
-  remote: git://github.com/chuckremes/ffi-rzmq.git
-  revision: 6e01b87354099f03e59b8257714ced771224b42c
-  specs:
-    ffi-rzmq (1.0.1)
-      ffi
-
-GIT
-  remote: git://github.com/faye/websocket-protocol-ruby
+  remote: git://github.com/faye/websocket-protocol-ruby.git
   revision: 10da09afbd175ced358eaba2e5bcd468ba4733df
   specs:
     websocket-protocol (0.1.0)
@@ -48,14 +41,13 @@ GEM
   specs:
     certified (0.1.1)
     coderay (1.0.9)
-    ffi (1.7.0)
     http (0.4.0)
       certified
       http_parser.rb
     http_parser.rb (0.5.3)
     method_source (0.8.1)
     nio4r (0.4.3)
-    pry (0.9.12.1)
+    pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
@@ -71,7 +63,6 @@ PLATFORMS
 DEPENDENCIES
   celluloid!
   celluloid-io!
-  ffi-rzmq!
   jruby-openssl
   reel!
   websocket-client-ruby!
