@@ -1,16 +1,12 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
-gem 'celluloid',     :git => 'git://github.com/celluloid/celluloid'
-gem 'celluloid-io',  :git => 'git://github.com/celluloid/celluloid-io'
-#gem 'celluloid-zmq', :git => 'git://github.com/celluloid/celluloid-zmq'
-#gem 'dcell',         :git => 'git://github.com/celluloid/dcell'
-gem 'reel',          :git => 'git://github.com/celluloid/reel'
-
-gem 'ffi-rzmq', :git => 'git://github.com/chuckremes/ffi-rzmq.git'
+gem 'celluloid',     :github => 'celluloid/celluloid'
+gem 'celluloid-io',  :github => 'celluloid/celluloid-io'
+gem 'reel',          :github => 'celluloid/reel'
 
 gem 'jruby-openssl', :platform => :jruby
 
-gem 'websocket-protocol', :git => 'git://github.com/faye/websocket-protocol-ruby'
+gem 'websocket-protocol', :github => 'faye/websocket-protocol-ruby'
 
-# Specify your gem's dependencies in ami-agents.gemspec
+# Specify your gem's dependencies in websocket-client-ruby.gemspec
 gemspec

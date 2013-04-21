@@ -2,3 +2,4 @@
 *.swo
 bundle
 .bundle
+Gemfile.lock
