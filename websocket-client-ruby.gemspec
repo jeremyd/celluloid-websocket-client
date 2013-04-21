@@ -8,5 +8,7 @@ Gem::Specification.new do |s|
   s.bindir = "bin"
   s.files = Dir.glob("lib/**/*.rb") + \
     Dir.glob("test/**/*.rb")
-  s.add_dependency("pry")
+  s.add_runtime_dependency("websocket-protocol")
+  s.add_runtime_dependency("celluloid-io")
+  s.add_development_dependency("pry")
 end
