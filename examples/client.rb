@@ -5,8 +5,8 @@ class MozWeb
   include Celluloid::Logger
 
   def initialize
-    @socket = Celluloid::IO::TCPSocket.new('127.0.0.1', '9123')
-    connection = Celluloid::WebSocket::Client::Connection.new(@socket, "http://localhost:9123/timeinfo")
+    @socket = Celluloid::IO::TCPSocket.new('127.0.0.1', '1234')
+    connection = Celluloid::WebSocket::Client::Connection.new(@socket, "http://localhost:1234/timeinfo")
     @handler = ::WebSocket::Protocol.client(connection)
   end
 
