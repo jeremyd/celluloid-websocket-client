@@ -1,34 +1,21 @@
-require 'websocket/protocol'
-require 'celluloid'
-require 'celluloid/io'
-
-module Celluloid
-  module IO
-    class TCPSocket
-      #include ConnectionMixin
-      #include RequestMixin
-      def url
-        "http://localhost:9123/timeinfo"
-      end
-    end
-  end
-end
+require 'celluloid/websocket/client'
 
 class MozWeb
   include Celluloid::IO
   include Celluloid::Logger
 
   def initialize
-    @socket = Celluloid::IO::TCPSocket.new('0.0.0.0', '9123')
+    @socket = Celluloid::IO::TCPSocket.new('127.0.0.1', '9123')
+    connection = Celluloid::WebSocket::Client::Connection.new(@socket, "http://localhost:9123/timeinfo")
+    @handler = ::WebSocket::Protocol.client(connection)
   end
 
   def start
-    handler = WebSocket::Protocol.client(@socket)
-    handler.onmessage { |message| info(message.data) }
-    handler.onopen { |message| info("websocket opened") }
-    handler.onclose { |message| info("websocket closed") }
-    handler.start
-    loop { handler.parse(@socket.readpartial(100)) }
+    @handler.onmessage { |message| info(message.data) }
+    @handler.onopen { |message| info("websocket opened") }
+    @handler.onclose { |message| info("websocket closed") }
+    @handler.start
+    loop { @handler.parse(@socket.readpartial(100)) }
   end
 end
 
