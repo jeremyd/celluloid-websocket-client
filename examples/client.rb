@@ -1,5 +1,4 @@
 require 'celluloid/websocket/client'
-require 'pry'
 
 class MozWeb
   include Celluloid
