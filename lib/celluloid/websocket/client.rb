@@ -5,8 +5,8 @@ require 'celluloid/io'
 module Celluloid
   module WebSocket
     module Client
-      def self.new(url)
-        Connection.new(url)
+      def self.new(*args)
+        Connection.new(*args)
       end
     end
   end
