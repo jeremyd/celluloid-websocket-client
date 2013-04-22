@@ -11,4 +11,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency("websocket-protocol")
   s.add_runtime_dependency("celluloid-io")
   s.add_development_dependency("pry")
+  s.add_development_dependency("rspec")
+  s.add_development_dependency("rake")
 end
