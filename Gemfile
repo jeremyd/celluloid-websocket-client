@@ -7,7 +7,7 @@ gem 'jruby-openssl', :platform => :jruby
 
 gem 'websocket-protocol', :github => 'faye/websocket-protocol-ruby'
 
-# Specify your gem's dependencies in websocket-client-ruby.gemspec
+# Specify your gem's dependencies in celluloid-websocket-client.gemspec
 gemspec
 
 group :examples do
