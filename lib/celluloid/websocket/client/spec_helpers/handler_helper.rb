@@ -3,7 +3,7 @@ class HandlerHelper
   include Celluloid::Logger
 
   def initialize
-    Celluloid::WebSocket::Client.new("ws://localhost:1234/timeinfo", current_actor)
+    Celluloid::WebSocket::Client.new("ws://localhost:9123/spec", current_actor)
   end
 
   def on_message(data)
