@@ -19,25 +19,21 @@ class ReeltalkClient
     message = JSON.parse(data)
     case message["action"]
     when "control"
-      reprompt do
-        puts "~ #{message.fetch("user")} #{message.fetch("message")}"
-      end
+      reprompt "~ #{message.fetch("user")} #{message.fetch("message")}"
     when "message"
       user = message.fetch("user")
       return if user == @user
-      reprompt do
-        puts "#{user}: #{message.fetch("message")}"
-      end
+      reprompt "#{user}: #{message.fetch("message")}"
     else
       warn "unknown action: #{message.inspect}"
     end
   end
 
-  def reprompt
+  def reprompt(message = nil)
     $stdout.write "\r"
     $stdout.write " " * 80
     $stdout.write "\r"
-    yield if block_given?
+    $stdout.puts message if message
     $stdout.write "#{@user}: "
   end
 
