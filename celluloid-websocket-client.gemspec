@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name = "websocket-client-ruby"
+  s.name = "celluloid-websocket-client"
   s.version = "0.0.1"
   s.summary = "websocket client using celluloid-io"
   s.authors = [ "Jeremy Deininger" ]
