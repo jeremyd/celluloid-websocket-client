@@ -14,4 +14,4 @@ else
   exit 1
 end
 
-require 'client'
+require File.expand_path('../../examples/client', __FILE__)
