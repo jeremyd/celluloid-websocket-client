@@ -37,7 +37,7 @@ module Celluloid
           end
         end
 
-        def_delegators :@client, :text
+        def_delegators :@client, :text, :binary, :ping, :close, :protocol
 
         def write(buffer)
           @socket.write buffer
