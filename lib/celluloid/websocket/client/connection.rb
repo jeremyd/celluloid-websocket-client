@@ -3,34 +3,34 @@ module Celluloid
     module Client
       class Connection
         include Celluloid::IO
-        include Celluloid::Logger
 
-        def initialize(url)
+        def initialize(url, handler)
           @url = url
           uri = URI.parse(url)
           port = uri.port || (uri.scheme == "ws" ? 80 : 443)
           @socket = Celluloid::IO::TCPSocket.new(uri.host, port)
-          @handler = ::WebSocket::Protocol.client(self)
+          @client = ::WebSocket::Protocol.client(self)
+          @handler = handler
 
           async.run
         end
-        attr_reader :url, :handler
+        attr_reader :url
 
         def run
-          @handler.onopen do |event|
-            info("websocket opened")
+          @client.onopen do |event|
+            @handler.on_open if @handler.respond_to?(:on_open)
           end
-          @handler.onmessage do |event|
-            info(event.data)
+          @client.onmessage do |event|
+            @handler.on_message(event.data) if @handler.respond_to?(:on_message)
           end
-          @handler.onclose do |event|
-            info("websocket closed")
+          @client.onclose do |event|
+            @handler.on_close(event.code, event.reason) if @handler.respond_to?(:on_close)
           end
 
-          @handler.start
+          @client.start
 
           loop do
-            @handler.parse(@socket.readpartial(1024))
+            @client.parse(@socket.readpartial(1024))
           end
         end
 
