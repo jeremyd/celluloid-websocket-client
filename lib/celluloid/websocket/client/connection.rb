@@ -7,12 +7,12 @@ module Celluloid
         include Celluloid::IO
         extend Forwardable
 
-        def initialize(url, handler)
+        def initialize(url, handler, opts={})
           @url = url
           uri = URI.parse(url)
           port = uri.port || (uri.scheme == "ws" ? 80 : 443)
           @socket = Celluloid::IO::TCPSocket.new(uri.host, port)
-          @client = ::WebSocket::Protocol.client(self)
+          @client = ::WebSocket::Protocol.client(self, opts)
           @handler = handler
 
           async.run
