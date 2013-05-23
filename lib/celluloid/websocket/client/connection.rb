@@ -12,7 +12,7 @@ module Celluloid
           uri = URI.parse(url)
           port = uri.port || (uri.scheme == "ws" ? 80 : 443)
           @socket = Celluloid::IO::TCPSocket.new(uri.host, port)
-          @client = ::WebSocket::Protocol.client(self)
+          @client = ::WebSocket::Driver.client(self)
           @handler = handler
 
           async.run
@@ -20,13 +20,13 @@ module Celluloid
         attr_reader :url
 
         def run
-          @client.onopen do |event|
+          @client.on('open') do |event|
             @handler.async.on_open if @handler.respond_to?(:on_open)
           end
-          @client.onmessage do |event|
+          @client.on('message') do |event|
             @handler.async.on_message(event.data) if @handler.respond_to?(:on_message)
           end
-          @client.onclose do |event|
+          @client.on('close') do |event|
             @handler.async.on_close(event.code, event.reason) if @handler.respond_to?(:on_close)
           end
 
