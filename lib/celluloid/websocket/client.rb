@@ -1,4 +1,4 @@
-require 'websocket/protocol'
+require 'websocket/driver'
 require 'celluloid'
 require 'celluloid/io'
 

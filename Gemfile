@@ -5,7 +5,7 @@ gem 'celluloid-io',  :github => 'celluloid/celluloid-io'
 
 gem 'jruby-openssl', :platform => :jruby
 
-gem 'websocket-protocol', :github => 'faye/websocket-protocol-ruby'
+gem 'websocket-driver', :github => 'faye/websocket-driver-ruby'
 
 # Specify your gem's dependencies in celluloid-websocket-client.gemspec
 gemspec
