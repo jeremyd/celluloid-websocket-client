@@ -33,7 +33,11 @@ module Celluloid
           @client.start
 
           loop do
-            @client.parse(@socket.readpartial(1024))
+            begin
+              @client.parse(@socket.readpartial(1024))
+            rescue EOFError
+              break
+            end
           end
         end
 
