@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = "celluloid-websocket-client"
-  s.version = "0.0.2.pre"
+  s.version = "0.0.2"
   s.summary = "websocket client using celluloid-io"
   s.authors = [ "Jeremy Deininger", "Tim Carey-Smith" ]
   s.email = [ "jeremydeininger@gmail.com", "tim@spork.in" ]
